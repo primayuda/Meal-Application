@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const Meals = () => {
-  const { meals, loading } = useGlobalContext();
+  const { meals, loading, selectMeal, addToFavorites } = useGlobalContext();
 
   if (loading) {
     return <section className='section-center'>
@@ -23,10 +23,10 @@ const Meals = () => {
       {meals.map(singleMeal => {
         const {idMeal, strMeal: title, strMealThumb: image} = singleMeal;
         return <article key={idMeal} className='single-meal'>
-          <img src={image} className='img'/>
+          <img src={image} className='img' onClick={() => selectMeal(idMeal)}/>
           <footer>
             <h5>{title}</h5>
-            <FaRegThumbsUp className='like-btn' />
+            <FaRegThumbsUp className='like-btn' onClick={() => addToFavorites(idMeal)} />
           </footer>
         </article>
       })}
